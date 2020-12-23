@@ -16,8 +16,16 @@ h2{
     @apply px-5 py-3;
 }
 .btn{
-    @apply px-10 py-3 rounded shadow-lg;
+    @apply px-10 py-3 rounded;
 }
 .btn-choice{
-    @apply bg-blue text-2xl;
+    @apply bg-blue text-3xl font-bold;
+    box-shadow: 0px 9px #272727;
+
+}
+
+.btn-choice:active{
+    box-shadow: 0 5px black;
+    transform: translateY(4px);
+    @apply bg-darkBlue;
 }

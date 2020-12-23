@@ -8,22 +8,34 @@
         {{ choice }}
       </button>
     </div>
+    <transition name="fade">
+      <CorrectAnswer v-show="isCorrect !== null && isCorrect"/>
+    </transition>
+    <transition name="fade">
+      <WrongAnswer v-show="isCorrect !== null && !isCorrect"/>
+    </transition>
   </article>
 </template>
 
 <script>
+import CorrectAnswer from "@/components/CorrectAnswer";
+import WrongAnswer from "@/components/WrongAnswer";
 export default {
   name: "Question",
+  components: {WrongAnswer, CorrectAnswer},
   props: ['question','color'],
+  data() {
+    return {
+      isCorrect : null,
+    }
+  },
   methods: {
     answer(value){
-      if(value === this.question.correctAnswer){
-        console.log('ok')
-      }else{
-        console.log('pas ok')
-      }
-
-      this.$parent.nextQuestion();
+      this.isCorrect = (value === this.question.correctAnswer);
+      setTimeout(() => {
+        this.isCorrect=null;
+        this.$parent.nextQuestion();
+      }, 2000)
     },
   },
 }
@@ -34,7 +46,14 @@ export default {
   @apply text-4xl font-bold;
 }
 .question-buttons{
-  @apply bottom-0 w-full bg-elevation-3 py-10 px-5;
+  @apply bottom-0 w-full bg-elevation-2 py-10 px-5;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>

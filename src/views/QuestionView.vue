@@ -21,11 +21,16 @@ export default {
         choices: ['oui','non','oui','non'],
         correctAnswer : 'oui',
       },
-      {
-        label: 'Question 2 ?',
-        choices: ['oui','non'],
-        correctAnswer : 'oui',
-      }],
+        {
+          label: 'Question 2 ?',
+          choices: ['oui','non'],
+          correctAnswer : 'oui',
+        },
+        {
+          label: 'Question 3 ?',
+          choices: ['oui','non'],
+          correctAnswer : 'oui',
+        }],
     }
   },
   methods: {
@@ -35,6 +40,9 @@ export default {
     nextQuestion(){
       this.currentQuestionIndex += 1;
     },
+  },
+  mounted() {
+    this.isCorrect = null;
   },
   computed: {
     currentQuestion() {
